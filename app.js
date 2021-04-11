@@ -2,9 +2,11 @@
 const grid = document.querySelector(".grid");
 const gridWidth = 332;
 const gridHeight = 332;
-
 const brickWidth = 58;
 const brickHeight = 18;
+
+const startingPosition = [137, 40];
+let currentPosition = startingPosition;
 
 // Brick class:
 class Brick {
@@ -42,6 +44,7 @@ const bricks = [
   new Brick(267, 251),
 ];
 
+// Iterate over the bricks array to append the bricks to the grid:
 function createBricks() {
   for (let i = 0; i < bricks.length; i++) {
     const brickDiv = document.createElement("div");
@@ -55,9 +58,29 @@ function createBricks() {
 }
 createBricks();
 
+// Create and append the user platform:
 const platform = document.createElement("div");
 platform.classList.add("platform");
-
+placePlatform();
 grid.appendChild(platform);
-//   platform.style.left = 137 + "px";
-//   platform.style.bottom = 40 + "px";
+
+function placePlatform() {
+  platform.style.left = `${startingPosition[0]}px`;
+  platform.style.bottom = `${startingPosition[1]}px`;
+}
+
+// Arrow keys to control user platform:
+function arrowControls(e) {
+  if (e.code === "ArrowLeft") {
+    currentPosition[0] -= 9;
+    platform.style.left = `${startingPosition[0]}px`;
+
+    // console.log("arrow left");
+  } else if (e.code === "ArrowRight") {
+    currentPosition[0] += 9;
+    platform.style.left = `${startingPosition[0]}px`;
+
+    // console.log("arrow right");
+  }
+}
+document.addEventListener("keydown", arrowControls);
