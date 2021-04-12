@@ -4,9 +4,19 @@ const gridWidth = 332;
 const gridHeight = 332;
 const brickWidth = 58;
 const brickHeight = 18;
+const ballSize = 20;
 
-const startingPosition = [137, 40];
+const startingPosition = [137, 40]; // [xAxis, yAxis]
 let currentPosition = startingPosition;
+
+const ballStartPosition = [157.5, 59];
+let ballPosition = ballStartPosition;
+
+// Set these to determine direction of ball when game starts (pixels):
+let ballXDirection = -0.5;
+let ballYDirection = 0.5;
+
+let ballMovementInterval;
 
 // Brick class:
 class Brick {
@@ -43,19 +53,6 @@ const bricks = [
   new Brick(202, 251),
   new Brick(267, 251),
 ];
-
-// Iterate over the bricks array to append the bricks to the grid:
-function createBricks() {
-  for (let i = 0; i < bricks.length; i++) {
-    const brickDiv = document.createElement("div");
-    brickDiv.classList.add("brick");
-
-    //   State the position of the bottom left corner of each brick:
-    brickDiv.style.left = bricks[i].bottomLeft[0] + "px";
-    brickDiv.style.bottom = bricks[i].bottomLeft[1] + "px";
-    grid.appendChild(brickDiv);
-  }
-}
 createBricks();
 
 // Create and append the user platform:
@@ -64,23 +61,63 @@ platform.classList.add("platform");
 placePlatform();
 grid.appendChild(platform);
 
-function placePlatform() {
-  platform.style.left = `${startingPosition[0]}px`;
-  platform.style.bottom = `${startingPosition[1]}px`;
+document.addEventListener("keydown", arrowControls);
+
+// Create and append the ball:
+const ball = document.createElement("div");
+ball.classList.add("ball");
+placeBall();
+grid.appendChild(ball);
+
+function ballMovement() {
+  ballPosition[0] += ballXDirection;
+  ballPosition[1] += ballYDirection;
+  placeBall();
+  ifBallBounces();
 }
+// The lower the interval, the quicker the ball.
+ballMovementInterval = setInterval(ballMovement, 1);
 
-// Arrow keys to control user platform:
-function arrowControls(e) {
-  if (e.code === "ArrowLeft") {
-    currentPosition[0] -= 9;
-    platform.style.left = `${startingPosition[0]}px`;
+function ifBallBounces() {
+  // If ball hits a wall:
+  if (
+    // top wall:
+    ballPosition[1] >= gridHeight - ballSize ||
+    // left wall:
+    ballPosition[0] <= 0 ||
+    // right wall:
+    ballPosition[0] >= gridWidth - ballSize
+  ) {
+    changeDirection();
+  }
+  // If ball hits the platform:
+  if (
+    ballPosition[0] > currentPosition[0] &&
+    ballPosition[0] < currentPosition[0] + brickWidth &&
+    ballPosition[1] > currentPosition[1] &&
+    ballPosition[1] < currentPosition[1] + brickHeight
+  ) {
+    // console.log(ballPosition);
+    changeDirection();
+  }
+  // If ball hits a brick from the bricks array:
+  for (let i = 0; i < bricks.length; i++) {
+    if (
+      ballPosition[0] > bricks[i].bottomLeft[0] &&
+      ballPosition[0] < bricks[i].bottomRight[0] &&
+      ballPosition[1] + ballSize > bricks[i].bottomLeft[1] &&
+      ballPosition[1] < bricks[i].topLeft[1]
+    ) {
+      const allBricks = Array.from(document.querySelectorAll(".brick"));
+      allBricks[i].classList.remove("brick");
+      bricks.splice(i, 1);
+      changeDirection();
+    }
+  }
 
-    // console.log("arrow left");
-  } else if (e.code === "ArrowRight") {
-    currentPosition[0] += 9;
-    platform.style.left = `${startingPosition[0]}px`;
-
-    // console.log("arrow right");
+  // If ball reaches bottom of grid i.e. game over:
+  if (ballPosition[1] <= 0) {
+    clearInterval(ballMovementInterval);
+    document.removeEventListener("keydown", arrowControls);
   }
 }
-document.addEventListener("keydown", arrowControls);
