@@ -33,14 +33,24 @@ body{
     position: absolute;
     width: 58px;
     height: 9px;
-    background-color: rgb(46, 41, 41);  
+    background-color: rgb(11, 4, 36);  
+    border-radius: 2px;
 }
-
+.ball{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(204, 235, 255);
+    border: solid black 1px;
+}
 .brick{
     position: absolute;
     width: 58px;
     height: 18px;
     background-color: black;
+    border-radius: 2px;
+
 }
 /* @media(min-width:769px){
     .brick{
