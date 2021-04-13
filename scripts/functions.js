@@ -53,4 +53,21 @@ function changeDirection() {
     ballYDirection = 0.5;
     return;
   }
+  // test:
+  if (ballXDirection === 0.9 && ballYDirection === 0.9) {
+    ballYDirection = -0.9;
+    return;
+  }
+  if (ballXDirection === -0.9 && ballYDirection === 0.9) {
+    ballXDirection = 0.9;
+    return;
+  }
+  if (ballXDirection === 0.9 && ballYDirection === -0.9) {
+    ballXDirection = -0.9;
+    return;
+  }
+  if (ballXDirection === -0.9 && ballYDirection === -0.9) {
+    ballYDirection = 0.9;
+    return;
+  }
 }
