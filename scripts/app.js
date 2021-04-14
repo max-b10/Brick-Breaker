@@ -1,30 +1,37 @@
 "use strict";
 
 const startButton = document.querySelector(".start-button");
+const restartButton = document.querySelector(".restart-button");
 const grid = document.querySelector(".grid");
+const score = document.querySelector(".score");
+const leftArrow = document.querySelector(".left");
+const rightArrow = document.querySelector(".right");
+
 const gridWidth = 332;
 const gridHeight = 332;
 const brickWidth = 58;
 const brickHeight = 18;
 const ballSize = 20;
-
 const startingPosition = [137, 40]; // [xAxis, yAxis]
 let currentPosition = startingPosition;
-
 const ballStartPosition = [157.5, 59];
 let ballPosition = ballStartPosition;
-
 // Set these to determine direction of ball when game starts (pixels):
 let ballXDirection = 0;
 let ballYDirection = 0;
-
 let ballMovementInterval;
+// let isGameOver = false;
 
 startButton.addEventListener("click", () => {
   startGame();
   startButton.style.display = "none";
 });
 
+// Restart Button behaviour:
+restartButton.style.display = "none";
+restartButton.addEventListener("click", () => {
+  window.location.reload(true);
+});
 // Brick class:
 class Brick {
   constructor(xAxis, yAxis) {
@@ -69,3 +76,13 @@ placePlatform();
 grid.appendChild(platform);
 
 document.addEventListener("keydown", arrowControls);
+
+// Arrow key controls:
+leftArrow.addEventListener("click", () => {
+  currentPosition[0] -= 10;
+  placePlatform();
+});
+rightArrow.addEventListener("click", () => {
+  currentPosition[0] += 10;
+  placePlatform();
+});
