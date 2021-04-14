@@ -1,8 +1,13 @@
+*{
+    font-family: 'Zen Dots', cursive;
+
+}
 body{
     padding: 0;
     margin: 0;
     display: border-box;
     height: 100vh;
+    width: 100vw;
     background-image: url('/images/backgroundImage.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,10 +17,30 @@ body{
     display: flex;
     justify-content: center;
 }
-
+.arrow-controls{
+    position: relative;
+    display: flex;
+    left: 23%;
+    top: 104%;
+}
+.arrow{
+    margin: 0 3px;
+    width:25%;
+    /* color: rgb(122 113 151); */
+    background-color: rgb(122 113 151);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+}
+.arrow:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+}
 .grid{
     position: absolute;
-    margin-top: 40px;
+    margin-top: 20%;
     height: 332px;
     width: 332px;
     border: solid black 1px;
@@ -23,14 +48,15 @@ body{
     border-radius: 4px;
 
 }
-.start-button{
+.start-button {
     position: absolute;
     margin: auto;
     top:50%;
-    left: 100px;
-    width: 116px;
-    background-color: rgb(0, 0, 0);
+    width: 100%;
+    background-color: rgb(152 143 180);
     color:white;
+    font-size: 20px;
+    font-weight: 700;
     outline: none;
     cursor: pointer;
     border: none;
@@ -45,6 +71,45 @@ body{
     -ms-transform: translateY(4px);
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
+}
+.restart-button{
+    position: absolute;
+    margin: auto;
+    top:50%;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding: 4px 8px;
+}
+.restart-button:hover{
+    /* background-color: rgba(0,0,0,.75); */
+    color:rgb(204, 235, 255);
+}
+.restart-button:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+}
+.score{
+    position: relative;
+    /* width: 116px; */
+    top:-21px;
+    left: 14%;
+    color: white;
+    font-weight: 700;
+  animation: blinker 1s linear infinite;
+
+}
+
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 /* @media(min-width:769px){
     .grid{
