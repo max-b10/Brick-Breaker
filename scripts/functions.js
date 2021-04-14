@@ -16,6 +16,7 @@ function placePlatform() {
   platform.style.left = `${startingPosition[0]}px`;
   platform.style.bottom = `${startingPosition[1]}px`;
 }
+
 // Start game button function:
 function startGame() {
   document.addEventListener("keydown", arrowControls);
@@ -32,8 +33,8 @@ function startGame() {
   placeBall();
 
   // Starting directon of the ball:
-  ballXDirection = 0.5;
-  ballYDirection = 0.5;
+  ballXDirection = -0.3;
+  ballYDirection = 0.3;
 
   function ballMovement() {
     ballPosition[0] += ballXDirection;
@@ -83,14 +84,23 @@ function startGame() {
         bricks.splice(i, 1);
         changeDirection();
       }
+      if (bricks.length == 0) {
+        score.innerHTML = "Congratulation! You Win!";
+        restartButton.style.display = "block";
+        restartButton.innerHTML = "Play Again";
+        ball.classList.remove("ball");
+
+        clearInterval(ballMovementInterval);
+        document.removeEventListener("keydown", arrowControls);
+      }
     }
 
     // If ball reaches bottom of grid i.e. game over:
     if (ballPosition[1] <= 0) {
       clearInterval(ballMovementInterval);
       document.removeEventListener("keydown", arrowControls);
-      startButton.style.display = "block";
-      startButton.innerHTML = "Play Again";
+      restartButton.style.display = "block";
+      restartButton.innerHTML = "Play Again";
       ball.classList.remove("ball");
     }
   }
@@ -110,20 +120,20 @@ function arrowControls(e) {
   }
 }
 function changeDirection() {
-  if (ballXDirection === 0.5 && ballYDirection === 0.5) {
-    ballYDirection = -0.5;
+  if (ballXDirection === 0.3 && ballYDirection === 0.3) {
+    ballYDirection = -0.3;
     return;
   }
-  if (ballXDirection === -0.5 && ballYDirection === 0.5) {
-    ballXDirection = 0.5;
+  if (ballXDirection === -0.3 && ballYDirection === 0.3) {
+    ballXDirection = 0.3;
     return;
   }
-  if (ballXDirection === 0.5 && ballYDirection === -0.5) {
-    ballXDirection = -0.5;
+  if (ballXDirection === 0.3 && ballYDirection === -0.3) {
+    ballXDirection = -0.3;
     return;
   }
-  if (ballXDirection === -0.5 && ballYDirection === -0.5) {
-    ballYDirection = 0.5;
+  if (ballXDirection === -0.3 && ballYDirection === -0.3) {
+    ballYDirection = 0.3;
     return;
   }
 }
