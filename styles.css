@@ -20,27 +20,34 @@ body{
 .arrow-controls{
     position: relative;
     display: flex;
-    left: 23%;
+    left: 18%;
     top: 104%;
 }
 .arrow{
-    margin: 0 3px;
+    margin: 0 11px;
     width:25%;
-    /* color: rgb(122 113 151); */
+    height:40px;
     background-color: rgb(122 113 151);
     border-radius: 2px;
     outline: none;
     cursor: pointer;
     border: none;
+    font-size: 30px;
+}
+@media(min-width:769px){
+    .arrow{
+    display: none;
+}
 }
 .arrow:active {
     -ms-transform: translateY(4px);
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
 }
+
 .grid{
     position: absolute;
-    margin-top: 20%;
+    margin-top: 15%;
     height: 332px;
     width: 332px;
     border: solid black 1px;
@@ -48,6 +55,12 @@ body{
     border-radius: 4px;
 
 }
+@media(max-width:769px){
+.grid{
+    margin-top: 25%;
+}
+}
+
 .start-button {
     position: absolute;
     margin: auto;
@@ -64,7 +77,6 @@ body{
     padding: 4px 8px;
 }
 .start-button:hover{
-    /* background-color: rgba(0,0,0,.75); */
     color:rgb(204, 235, 255);
 }
 .start-button:active {
@@ -86,7 +98,6 @@ body{
     padding: 4px 8px;
 }
 .restart-button:hover{
-    /* background-color: rgba(0,0,0,.75); */
     color:rgb(204, 235, 255);
 }
 .restart-button:active {
@@ -96,7 +107,6 @@ body{
 }
 .score{
     position: relative;
-    /* width: 116px; */
     top:-21px;
     left: 14%;
     color: white;
@@ -104,19 +114,12 @@ body{
   animation: blinker 1s linear infinite;
 
 }
-
-
 @keyframes blinker {
   50% {
     opacity: 0;
   }
 }
-/* @media(min-width:769px){
-    .grid{
-    height: 500px;
-    width: 500px;
-}
-} */
+
 .platform{
     position: absolute;
     width: 58px;
@@ -140,11 +143,3 @@ body{
     border-radius: 2px;
 
 }
-/* @media(min-width:769px){
-    .brick{
-    width: 48px;
-    height: 15px;
-    background-color: red;
-    margin: 1px 1px;
-}
-} */
