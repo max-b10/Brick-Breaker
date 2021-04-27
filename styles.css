@@ -12,7 +12,35 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
-
+.nav{
+    position: fixed;
+    top:0;
+    left: 5px;
+    z-index: 100;
+    width: 100%;
+    height: 40px;
+}
+.return-button{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #ffffff;
+    color: black;
+    margin: .5rem 2rem;
+    font-size: .75rem;
+    outline: none;
+    border: none;
+    padding: .5rem .5rem;
+    border-radius: 2px;
+}
+#return-image{
+    height: 20px;
+    margin-right: 5px;
+}
+.return-button:hover{
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
+}
 .game-container{
     display: flex;
     justify-content: center;
