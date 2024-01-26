@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 const portfolioButton = document.querySelector(".return-button");
 const startButton = document.querySelector(".start-button");
@@ -24,7 +24,7 @@ let ballMovementInterval;
 // let isGameOver = false;
 
 portfolioButton.addEventListener("click", () => {
-  window.location.replace("https://portfoliomax.netlify.app/");
+  window.location.replace("https://maxbungay.com");
 });
 startButton.addEventListener("click", () => {
   startGame();

@@ -56,8 +56,6 @@ function startGame() {
       // right wall:
       ballPosition[0] >= gridWidth - ballSize
     ) {
-      console.log(ballXDirection, ballYDirection);
-
       changeDirection();
     }
     // If ball hits the platform:
@@ -67,8 +65,6 @@ function startGame() {
       ballPosition[1] > currentPosition[1] &&
       ballPosition[1] < currentPosition[1] + brickHeight
     ) {
-      console.log(ballXDirection, ballYDirection);
-
       changeDirection();
     }
     // If ball hits a brick from the bricks array:
